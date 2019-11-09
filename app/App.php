@@ -12,6 +12,8 @@ class App
         if (!isset($_SERVER['QUERY_STRING'])) {
             throw new Exception("Bad Request");
         }
+
+        $this->errorsController = new Controller();
         $this->extractUrl();
         $this->routeFetch();
     }
@@ -41,14 +43,17 @@ class App
             }
         }
     }
-
+    /**
+     * This method calls wanted url depending on fetched controller and method
+     * and passes the rest of the url as arguments
+     * */
     private function routeFetch()
     {
-
+        //If controller exist call it other ways return page not found
         if ($this->checkExistController()) {
             $this->callFunction($this->args);
         } else {
-            echo "<h1>Page not found 404.</h1>";
+            $this->errorsController->pageNotFound();
         }
     }
 
@@ -58,7 +63,7 @@ class App
      */
     private function checkExistController()
     {
-        $controller = $this->getController().".php";
+        $controller = $this->getController() . ".php";
         if (!file_exists("./controller/" . $controller)) {
             return false;
         }
@@ -69,8 +74,8 @@ class App
      * example : home => HomeController
      */
     private function getController()
-    { 
-        return ucfirst($this->controller)."Controller";
+    {
+        return ucfirst($this->controller) . "Controller";
     }
     /**
      * This method for calling the controller and the method with the arguments

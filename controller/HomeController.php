@@ -8,17 +8,23 @@
 
         public function index($args)
         {
-            $title = "Page title | $args[0]";
-            $list = [
-                "Morocco",
-                "France",
-                "Spagne",
-                "Italy",
-                "Egypt"
-            ];       
-            $this->render("home",[
-                "title"=>$title,
-                "list"=>$list
-            ]);
+            if(isset($args[0]))
+            {
+                $titles = $args[0];
+                $list = [
+                    "Morocco",
+                    "France",
+                    "Spagne",
+                    "Italy",
+                    "Egypt"
+                ];       
+                $this->render("home",[
+                    "title"=>$titles,
+                    "list"=>$list
+                ]);
+            }
+            else{
+                $this->pageNotFound();
+            }
         }
     }

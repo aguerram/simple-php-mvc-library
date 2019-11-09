@@ -5,6 +5,7 @@
 
     require("./app/Controller.php");
     
+    require('./config/env.php');
     $list = scandir("./controller");
     if(count($list)<=2)
     {
@@ -16,4 +17,9 @@
             include CONTROLLER_DIR."/".$file;
         }
     }
+
+    //to initialize env variabels from .env
+    $env = new ENV();
+
+    //to initialize the application
     $app = new App();
