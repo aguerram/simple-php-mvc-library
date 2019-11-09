@@ -5,9 +5,10 @@
         {
            
         }
+
         public function index($args)
         {
-            $title = "Page title";
+            $title = "Page title | $args[0]";
             $list = [
                 "Morocco",
                 "France",
@@ -15,7 +16,6 @@
                 "Italy",
                 "Egypt"
             ];       
-              
             $this->render("home",[
                 "title"=>$title,
                 "list"=>$list
