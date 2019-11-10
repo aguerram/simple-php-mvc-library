@@ -24,7 +24,15 @@
             global $env;
             return $env->get($path);
         }
-
+        protected function model($model)
+        {
+            $Model = ucfirst($model)."Model";
+            if(!file_exists("model/$Model.php"))
+                throw new Exception("$model not exist");
+            require_once("model/$Model.php");
+            $inst = new $Model();
+            return $inst;
+        }
         public function pageNotFound()
         {
             $this->render("errors/404");

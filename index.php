@@ -3,6 +3,8 @@
 
     require("./app/App.php");
 
+    require("./app/Model.php");
+    
     require("./app/Controller.php");
     
     require('./config/env.php');

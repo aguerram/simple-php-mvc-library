@@ -21,7 +21,7 @@
                     //split founded line into 2
                     if(count($split_line)==2)
                     {
-                        $this->env[$split_line[0]] = $split_line[1];
+                        $this->env[trim($split_line[0])] = trim($split_line[1]);
                     }
                 }
             }

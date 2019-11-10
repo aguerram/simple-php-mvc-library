@@ -10,6 +10,11 @@
         {
             if(isset($args[0]))
             {
+                $userModel = $this->model("user");
+                echo $userModel->create([
+                    "nom"=>"Mostafa",
+                    "id"=>5
+                ]);
                 $titles = $args[0];
                 $list = [
                     "Morocco",
@@ -17,10 +22,10 @@
                     "Spagne",
                     "Italy",
                     "Egypt"
-                ];       
+                ];
                 $this->render("home",[
                     "title"=>$titles,
-                    "list"=>$list
+                    "list"=>$userModel->all()
                 ]);
             }
             else{

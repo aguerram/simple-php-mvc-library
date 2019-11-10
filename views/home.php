@@ -17,7 +17,7 @@
             <?php if (isset($list)) : ?>
                 <ul>
                     <?php foreach ($list as $key => $val) : ?>
-                        <li><?= $val ?></li>
+                        <li><?= $val["nom"] ?></li>
                     <?php endforeach; ?>
                 </ul>
             <?php endif; ?>
