@@ -15,10 +15,13 @@ class Controller extends BaseInstance
      */
 
     public $request;
+    private $valid;
+    public $errors = array();
 
     public final function __construct($request)
     {
         $this->request = $request;
+        $this->valid = new Validate();
         $this->start();
     }
 
@@ -33,6 +36,40 @@ class Controller extends BaseInstance
         }
         include "./views/$view.php";
     }
+
+    protected function validate($value, $checks = "exist", $message=null)
+    {
+        $list = explode("|", $checks);
+        $msg = null;
+        foreach ($list as $line) {
+            $l = trim($line);
+            if ($l == "string") {
+                $msg = $this->valid->isString($value,$message);
+            }
+            else if($l == "email")
+            {
+                $msg = $this->valid->isEmail($value,$message);
+            }
+            else if($l == "number")
+            {
+                $msg = $this->valid->isNumber($value,$message);
+            }
+            else if(preg_match("/^min\:[0-9]+$/",$l))
+            {
+                $split = explode(":",$l);
+                $msg = $this->valid->min($value,$split[1],$message);
+
+            }
+            else if(preg_match("/^max\:[0-9]+$/",$l))
+            {
+                $split = explode(":",$l);
+                $msg = $this->valid->max($value,$split[1],$message);
+            }
+            if ($msg != null)
+                array_push($this->errors, $msg);
+        }
+    }
+
     /**
      * This method used to call a middleware
      * @param middlewares is an array of arrays of middleware name as a key 

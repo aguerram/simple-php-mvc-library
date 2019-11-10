@@ -20,12 +20,12 @@
                 Model::$connection = new PDO("mysql:host=$host;dbname=$db", $user, $password,$options);
             }
         }
-        private function env($path)
+        protected function env($path)
         {
             global $env;
             return $env->get($path);
         }
-        private function escape($sql)
+        protected function escape($sql)
         {
             $sql = str_replace("'","\'",$sql);
             $sql = str_replace('"','\"',$sql);

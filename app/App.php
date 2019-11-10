@@ -6,12 +6,15 @@ class App
     private $method = "index";
     private $args = [];
     private $url = "";
+    private $request;
+
     public function __construct()
     {
         // print_r($_SERVER);
         if (!isset($_SERVER['QUERY_STRING'])) {
             throw new Exception("Bad Request");
         }
+        $this->request =  new stdClass();;
         $this->extractUrl();
         $this->errorsController = new Controller($this->getRequest());
         $this->routeFetch();
@@ -29,7 +32,16 @@ class App
         if ($urls_length >= 2 || ($urls_length >= 1 && $urls[0] != "")) {
             $this->controller = $urls[0];
             if ($urls_length >= 2 && $urls[1] != "") {
-                $this->method = $urls[1];
+                if (strpos($urls[1], "&") > 0) {
+                    $list = explode("&", $urls[1]);
+                    $this->method = $list[0];
+                    for ($i = 1; $i < count($list); $i++) { 
+                        $line = explode("=",$list[$i]);
+                        $_GET[$line[0]] = $line[1] or true;
+                    }
+                } else
+                    $this->method = $urls[1];
+
                 //That means there are arguments in the array
                 if ($urls_length > 2) {
                     foreach (array_slice($urls, 2) as $arg) {
@@ -81,11 +93,11 @@ class App
      */
     private function callFunction($args = [])
     {
-        
+
         $_controller = $this->getController();
-        $method = $this->method."". ucwords($_SERVER['REQUEST_METHOD']);
+        $method = $this->method . "" . ucwords($_SERVER['REQUEST_METHOD']);
         $inst = new $_controller($this->getRequest());
-        
+
         $inst->$method($args);
     }
     /**
@@ -94,10 +106,10 @@ class App
      */
     private function getRequest()
     {
-        $request = new stdClass;
-        $request->url=$this->controller;
-        $request->method=strtolower($_SERVER['REQUEST_METHOD']);
-        $request->function = $this->method."". ucwords($_SERVER['REQUEST_METHOD']);
+        $request = $this->request;
+        $request->url = $this->controller;
+        $request->method = strtolower($_SERVER['REQUEST_METHOD']);
+        $request->function = $this->method . "" . ucwords($_SERVER['REQUEST_METHOD']);
         return $request;
     }
 }

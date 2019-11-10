@@ -7,6 +7,8 @@
 
     require("./app/App.php");
 
+    require("./app/Validate.php");
+
     require("./app/BaseInstace.php");
 
     require("./app/Model.php");

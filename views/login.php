@@ -1,6 +1,5 @@
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
 <!------ Include the above in your HEAD tag ---------->
 
 <!DOCTYPE html>
@@ -43,6 +42,24 @@
             <div class="d-flex justify-content-center mt-3 login_container">
               <button type="submit" name="button" class="btn login_btn">Login</button>
             </div>
+
+            <!-- Errors section -->
+            <?php if (isset($errors)) : ?>
+              <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                <ul>
+                  <?php foreach ($errors as $err) : ?>
+                  <li><?= $err ?></li>
+                  <?php endforeach; ?>
+                </ul>
+              </div>
+            <?php endif; ?>
+
+            <script>
+              $(".alert").alert();
+            </script>
           </form>
         </div>
 
@@ -54,6 +71,8 @@
       </div>
     </div>
   </div>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </body>
 
 </html>
