@@ -3,6 +3,7 @@
     class HomeController extends Controller{
         public function indexGet($args)
         {
+            
             if(isset($args[0]))
             {
                 $userModel = $this->model("user");

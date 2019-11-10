@@ -1,8 +1,7 @@
 <?php
 
 /**
- * This class extended by middleware and controller, to share the same method of instancing
- * other controllers or models
+ * This class extended by middleware and controller, for shared method
  */
 class BaseInstance
 {
@@ -36,10 +35,20 @@ class BaseInstance
             
             if (!file_exists("controller/$Controller.php"))
                 throw new Exception("Controller '$controller' not exist");
-            require_once("controller/$Controller.php");
             $inst = new $Controller();
             BaseInstance::$instances[$Controller] = $inst;
             return $inst;
         }
+    }
+    protected function env($path)
+    {
+        global $env;
+        return $env->get($path);
+    }
+    protected function redirect($path)
+    {
+        $base = $this->env("APP_URL");
+        header("Location: $base$path");
+        die;
     }
 }

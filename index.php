@@ -16,6 +16,9 @@
     require("./app/Controller.php");
 
     require('./config/env.php');
+
+    require('./config/functions.php');
+    
     $list = scandir("./controller");
     if (count($list) <= 2) {
         throw new Exception("No Controller is defined");

@@ -8,4 +8,8 @@
         {
             $this->render("login");
         }
+        public function indexPost($args)
+        {
+            print_r($_POST);
+        }
     }

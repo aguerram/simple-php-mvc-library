@@ -33,13 +33,6 @@ class Controller extends BaseInstance
         }
         include "./views/$view.php";
     }
-
-    protected function env($path)
-    {
-        global $env;
-        return $env->get($path);
-    }
-
     /**
      * This method used to call a middleware
      * @param middlewares is an array of arrays of middleware name as a key 
@@ -49,13 +42,13 @@ class Controller extends BaseInstance
     protected function middleware($middlewares = [])
     {
         foreach ($middlewares as $key => $midl) {
-            if (is_numeric($midl))
+            if (is_numeric($key))
                 $key = $midl;
             $Midl = ucfirst($key) . "Middleware";
             if (!file_exists("./middleware/$Midl.php"))
                 throw new Exception("Middleware '$key' not exist, if your calling this class for __construct, you should consider using start method insead.");
             require_once("middleware/$Midl.php");
-            if (!is_numeric($midl)) {
+            if (!is_numeric($key)) {
                 if (is_array($midl))
                     foreach ($midl as $route) {
                         if (strtolower($route) == strtolower($this->request->function))
