@@ -5,6 +5,8 @@
     
     session_start();
 
+    require("./utils/Utils.php");
+
     require("./app/App.php");
 
     require("./app/Validate.php");

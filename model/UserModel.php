@@ -12,6 +12,6 @@ class UserModel extends Model
             ":email"=>$email,
             ":password"=>$password
         ]);
-        var_dump($user);
+        return $user;
     }
 }

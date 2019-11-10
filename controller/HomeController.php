@@ -1,27 +1,26 @@
 <?php
 
-    class HomeController extends Controller{
-        public function indexGet($args)
-        {
-            
-            if(isset($args[0]))
-            {
-                $userModel = $this->model("user");
-                $titles = $args[0];
-                $list = [
-                    "Morocco",
-                    "France",
-                    "Spagne",
-                    "Italy",
-                    "Egypt"
-                ];
-                $this->render("home",[
-                    "title"=>$titles,
-                    "list"=>$userModel->all()
-                ]);
-            }
-            else{
-                $this->pageNotFound();
-            }
-        }
+class HomeController extends Controller
+{
+    public function start()
+    {
+        $this->middleware(["auth"]);
     }
+    public function indexGet($args)
+    {
+
+        $userModel = $this->model("user");
+        $titles = "Home";
+        $list = [
+            "Morocco",
+            "France",
+            "Spagne",
+            "Italy",
+            "Egypt"
+        ];
+        $this->render("home", [
+            "title" => $titles,
+            "list" => $userModel->all()
+        ]);
+    }
+}

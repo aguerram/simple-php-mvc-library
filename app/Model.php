@@ -44,13 +44,13 @@
         {
             $stm = Model::$connection->prepare($this->escape($sql));
             $stm->execute($args);
-            return $stm->fetchAll(PDO::FETCH_ASSOC);
+            return $stm->fetchAll();
         }
         public function selectOne($sql, $args = [])
         {
             $stm = Model::$connection->prepare($this->escape($sql)." limit 1");
             $stm->execute($args);
-            return $stm->fetch(PDO::FETCH_ASSOC);
+            return $stm->fetch();
         }
         public function all($columns = "*", $condition = "1")
         {
@@ -97,5 +97,16 @@
         {
             $cond = $this->escape($condition);
             return $this->query("delete from ".$this->table." where $cond");
+        }
+        public function findById($id)
+        {
+            if(is_numeric($id))
+            {
+                $table = $this->table;
+                return $this->selectOne("select * from $table where id = $id");
+            }
+            else{
+                return null;
+            }
         }
     }

@@ -5,22 +5,22 @@
  */
 class BaseInstance
 {
-    private static $instances = [];
+    private  $instances = [];
 
     protected function model($model)
     {
         /*Check if the model is already called by other object, then return the same instace
         Other wats create new instance and save it to the array*/
         $Model = ucfirst($model) . "Model";
-
-        if (array_key_exists($model, BaseInstace::$instances)) {
-            return BaseInstance::$instances[$Model];
+        
+        if (array_key_exists($model, $this->instances)) {
+            return $this->instances[$Model];
         } else {
             if (!file_exists("model/$Model.php"))
                 throw new Exception("$model not exist");
             require_once("model/$Model.php");
             $inst = new $Model();
-            BaseInstance::$instances[$Model] = $inst;
+            $this->instances[$Model] = $inst;
             return $inst;
         }
     }

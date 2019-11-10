@@ -11,14 +11,28 @@
                 }
             }
             else{
-                $this->redirect("/login");
+                if(!$this->isLoggedIn())
+                {
+                    $this->redirect("/login");
+                }
             }
         }
         private function isLoggedIn()
         {
-            if(isset($_SESSION['token']))
+            if(isset($_SESSION['token']) && isset($_SESSION['id']))
             {
-                return true;
+                $userModel = $this->model("user");
+
+                $id = $_SESSION['id'];
+                $user = $userModel->findById($id);
+                if($user && $user->token == $_SESSION['token'])
+                {
+                    return true;
+                }
+                return false;
+            }
+            else{
+                return false;
             }
         }
     }

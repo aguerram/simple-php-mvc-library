@@ -25,13 +25,13 @@
               <div class="input-group-append">
                 <span class="input-group-text"><i class="fas fa-user"></i></span>
               </div>
-              <input min="4" type="email" name="email" class="form-control input_user" value="" placeholder="username">
+              <input min="4" type="email" name="email" class="form-control input_user" value="<?= isset($email)?$email:"" ?>" placeholder="Email">
             </div>
             <div class="input-group mb-2">
               <div class="input-group-append">
                 <span class="input-group-text"><i class="fas fa-key"></i></span>
               </div>
-              <input min="8" type="password" name="password" class="form-control input_pass" value="" placeholder="password">
+              <input min="8" type="password" name="password" class="form-control input_pass" value="" placeholder="Password">
             </div>
             <div class="form-group">
               <div class="custom-control custom-checkbox">
