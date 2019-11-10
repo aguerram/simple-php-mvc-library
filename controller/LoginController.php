@@ -3,7 +3,7 @@ class LoginController extends Controller
 {
     public function start()
     {
-        $this->middleware(["auth"]);
+        $this->middleware(["auth"=>["logoutget"]]);
     }
     public function indexGet($args)
     {
@@ -34,5 +34,11 @@ class LoginController extends Controller
                 $this->redirect("/");
             }
         }
+    }
+    public function logoutGet()
+    {
+        unset($_SESSION['token']);
+        unset($_SESSION['id']);
+        $this->redirect("/login");
     }
 }
