@@ -12,9 +12,8 @@ class App
         if (!isset($_SERVER['QUERY_STRING'])) {
             throw new Exception("Bad Request");
         }
-
-        $this->errorsController = new Controller();
         $this->extractUrl();
+        $this->errorsController = new Controller($this->getRequest());
         $this->routeFetch();
     }
     /**
@@ -82,9 +81,23 @@ class App
      */
     private function callFunction($args = [])
     {
+        
         $_controller = $this->getController();
-        $method = $this->method;
-        $inst = new $_controller();
+        $method = $this->method."". ucwords($_SERVER['REQUEST_METHOD']);
+        $inst = new $_controller($this->getRequest());
+        
         $inst->$method($args);
+    }
+    /**
+     * This method will return a request object that contains 
+     * some of knonw methods
+     */
+    private function getRequest()
+    {
+        $request = new stdClass;
+        $request->url=$this->controller;
+        $request->method=strtolower($_SERVER['REQUEST_METHOD']);
+        $request->function = $this->method."". ucwords($_SERVER['REQUEST_METHOD']);
+        return $request;
     }
 }
