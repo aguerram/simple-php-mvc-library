@@ -7,10 +7,11 @@
 
 <head>
   <title>Login Page</title>
-  <link rel="stylesheet" href="<?= assets('/assets/css/login.css') ?>" />
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+  <link rel="stylesheet" href="<?= assets('/assets/css/login.css') ?>" />
+
 </head>
 <!--Coded with love by Mutiullah Samim-->
 
@@ -26,7 +27,7 @@
               <div class="input-group-append">
                 <span class="input-group-text"><i class="fas fa-user"></i></span>
               </div>
-              <input min="4" type="email" name="email" class="form-control input_user" value="<?= isset($email)?$email:"" ?>" placeholder="Email">
+              <input min="4" type="text" name="username" class="form-control input_user" value="<?= isset($username)?$username:"" ?>" placeholder="Username">
             </div>
             <div class="input-group mb-2">
               <div class="input-group-append">
@@ -39,18 +40,8 @@
             </div>
 
             <!-- Errors section -->
-            <?php if (isset($errors)) : ?>
-              <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-                <ul>
-                  <?php foreach ($errors as $err) : ?>
-                  <li><?= $err ?></li>
-                  <?php endforeach; ?>
-                </ul>
-              </div>
-            <?php endif; ?>
+            <?php include("views/shared/errors.php") ?>
+            <?php include("views/shared/success.php") ?>
 
             <script>
               $(".alert").alert();
@@ -60,7 +51,7 @@
 
         <div class="mt-4">
           <div class="d-flex justify-content-center links">
-            Don't have an account? <a href="#" class="ml-2">Sign Up</a>
+            Don't have an account? <a href="<?= route("/signup") ?>" class="ml-2">Sign Up</a>
           </div>
         </div>
       </div>

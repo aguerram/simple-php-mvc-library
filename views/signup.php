@@ -1,0 +1,82 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Signup Page</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+    <link rel="stylesheet" href="<?= assets('/assets/css/login.css') ?>" />
+
+</head>
+
+<body>
+    <div class="container h-100">
+        <div class="d-flex justify-content-center align-items-center h-100">
+            <div class="user_card col-6 shadow-sm p-4">
+                <div class="d-flex justify-content-center">
+                </div>
+                <div class="d-flex justify-content-center form_container">
+                    <form class="col-10" method="post" action="<?= route("/signup") ?>">
+                        <div class="input-group mb-3">
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                            </div>
+                            <input min="4" type="text" name="username" class="form-control input_user" value="<?= isset($username) ? $username : "" ?>" placeholder="Username">
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                            </div>
+                            <input min="4" type="text" name="first_name" class="form-control input_user" value="<?= isset($first_name) ? $first_name : "" ?>" placeholder="First name">
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                            </div>
+                            <input min="4" type="text" name="last_name" class="form-control input_user" value="<?= isset($last_name) ? $last_name : "" ?>" placeholder="Last name">
+                        </div>
+                    <br>
+                        <div class="input-group mb-2">
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="fas fa-key"></i></span>
+                            </div>
+                            <input min="8" type="password" name="password" class="form-control input_pass" value="" placeholder="Password">
+                        </div>
+
+                        <div class="input-group mb-2">
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="fas fa-key"></i></span>
+                            </div>
+                            <input min="8" type="password" name="r_password" class="form-control input_pass" value="" placeholder="Repeat password">
+                        </div>
+
+                        <div class="d-flex justify-content-center mt-3 login_container">
+                            <button type="submit" name="button" class="btn login_btn">Sign up</button>
+                        </div>
+
+                        <!-- Errors section -->
+                        <?php include("views/shared/errors.php") ?>
+                        <?php include("views/shared/success.php") ?>
+
+                        <script>
+                            $(".alert").alert();
+                        </script>
+                    </form>
+                </div>
+
+                <div class="mt-4">
+                    <div class="d-flex justify-content-center links">
+                        Don't have an account? <a href="<?= route("/login") ?>" class="ml-2">Login</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</body>
+
+</html>

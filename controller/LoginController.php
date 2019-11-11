@@ -11,20 +11,20 @@ class LoginController extends Controller
     }
     public function indexPost($args)
     {
-        $this->validate($_POST['email'], "email", "Your email isn't valid");
+        $this->validate($_POST['username']);
         $this->validate($_POST['password'], "min:8", "Password isn't valid");
         if (count($this->errors) > 0) {
             $this->render("login", [
                 "errors" => $this->errors,
-                "email" => $_POST['email']
+                "username" => $_POST['username']
             ]);
         } else {
             $userModel = $this->model("user");
-            $user = $userModel->login($_POST['email'], $_POST['password']);
+            $user = $userModel->login($_POST['username'], $_POST['password']);
             if (!$user) {
                 $this->render("login", [
-                    "errors" => ["Email or password aren't correct"],
-                    "email" => $_POST['email']
+                    "errors" => ["Username or password aren't correct"],
+                    "username" => $_POST['username']
                 ]);
             } else {
                 $token = Utils::generateRandomString(64);

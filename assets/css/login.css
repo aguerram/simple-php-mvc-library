@@ -1,9 +1,14 @@
 body{
     background-image: url("../img/background.png");
     background-repeat: round;
+    height: 100vh;
 }
 .user-card{
     background-color:#ffffff0a;
     padding: 45px 16px !important;
-
+}
+.links{
+    background-color: #ffffffa3;
+    border-radius: 20px;
+    padding: 5px 4px;
 }

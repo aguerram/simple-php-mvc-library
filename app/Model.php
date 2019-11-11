@@ -64,7 +64,7 @@
             $sql = "update $table set ";
             foreach ($array as $key => $value) {
                 $sql .= " $key=:$key,";
-                $values[":$key"] = $value;
+                $values[":$key"] = trim($value);
             }
             $sql = substr($sql, 0, strlen($sql) - 1);
             $sql .= " where $condition";
@@ -83,7 +83,7 @@
             foreach ($array as $key => $value) {
                 $cols .= "$key";
                 $col_values .= ":$key";
-                $values["$key"] = $value;
+                $values["$key"] = trim($value);
                 $index++;
                 if ($index < $length) {
                     $cols .= ",";

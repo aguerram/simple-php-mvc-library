@@ -20,7 +20,7 @@ class Validate
     }
     public function isString($val, $msg=null)
     {
-        if (preg_match("/^[a-z_\']$/i", $val)) {
+        if (preg_match("/^[a-z_\'\s]+$/i", $val)) {
             return null;
         } else {
             return $msg?$msg:"'$val' is not a valid string";
