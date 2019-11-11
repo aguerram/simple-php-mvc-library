@@ -79,11 +79,11 @@ INSERT INTO `products` (`id`, `title`, `price`, `created_at`) VALUES
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
-  `first_name` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `first_name` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8_general_ci NOT NULL,
   `last_name` varchar(32) NOT NULL,
-  `username` varchar(96) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `username` varchar(96) CHARACTER SET utf8mb4 COLLATE utf8_general_ci NOT NULL,
   `password` varchar(32) NOT NULL,
-  `token` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `token` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8_general_ci DEFAULT NULL,
   `is_admin` int(11) NOT NULL DEFAULT '0',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8_general_ci;
