@@ -17,7 +17,7 @@
             <?php if (isset($list)) : ?>
                 <ul>
                     <?php foreach ($list as $key => $val) : ?>
-                        <li><?= $val->name ?></li>
+                        <li><?= $val->username ?></li>
                     <?php endforeach; ?>
                 </ul>
             <?php endif; ?>

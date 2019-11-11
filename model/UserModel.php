@@ -8,7 +8,7 @@ class UserModel extends Model
     {
         $password = md5($password);
         $table = $this->table;
-        $user = $this->selectOne("select id from $table where username=:username and password=:password",[
+        $user = $this->selectOne("select id,is_admin from $table where username=:username and password=:password",[
             ":username"=>$email,
             ":password"=>$password
         ]);
